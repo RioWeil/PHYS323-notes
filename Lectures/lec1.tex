@@ -1,0 +1,188 @@
+\section{Relativistic Kinematics}
+Course logistics - see syllabus.
+
+\subsection{Symmetries of Classical Mechanics}
+We will start with Ch. 8/9 of Wald's book, and discuss relativistic kinematics.
+
+The basic fact discovered after the formulation of Maxwell's theory of electromagnetism is that there is a clash between Maxwell's theory (Lorentz invariance) and the symmetries of classical mechanics (Galilean invariance). We will start by reviewing these symmetries, and then discuss how to promote these symmetries to field theory.
+
+Consider the following (relatively general) class of problems. We have $N$ particles, labelled by coordinates $\v{x}_1(t), \v{x}_2(t), \ldots, \v{x}_N(t)$, which have pairwise interactions that only depend on the particle separation $V_{ij}(\abs{\v{x}_i - \v{x}_j})$. In classical mechanics (as you learned two quarters ago), we use a Lagrangian to describe the system:
+\begin{equation}
+    \LL = \frac{1}{2}\sum_{i=1}^N m_i \dot{\v{x}}^2_i - \sum_{i < j}V_{ij}(\abs{\v{x}_i - \v{x}_j})
+\end{equation}
+and we have the Euler-Lagrange equation(s) which are the equations of motion of the system:
+\begin{equation}
+    m_i\ddot{\v{x}}_i = -\nabla_i\sum_{y\neq i} V_{ij}(\abs{\v{x}_i - \v{x}_j})
+\end{equation}
+where we work in 3-dimensions, so $\v{x}_i = (x_i, y_i, z_i)$ and $\nabla_i = (\dpd{}{x_i}, \dpd{}{y_i}, \dpd{}{z_i})$. This theory has a couple symmetries (i.e. if we have a solution to the equations of motion, under some transformation the equations are still solutions. This manifests as a transformation that leaves $\LL$ invariant):
+\begin{enumerate}
+    \item Translational invariance:
+    \begin{equation}
+        \v{x}_i \to \v{x}_i + \v{a}
+    \end{equation}
+    The kinetic term does not change because the $\v{a}$ is not time-dependent (and hence is killed by the time derivative) and the potential term does not change because the potential only depends on the difference of the positions (and hence the $\v{a}$s cancel). Physically, we can take our entire system and shift it over by $\v{a}$ and nothing changes. Why are we wasting our time with this nonsense? Thanks to Noether, we know that this symmetry that looks nontrivial implies \emph{momentum conservation}.
+    \item Time translation invariance:
+    \begin{equation}
+        t \to t + t_0
+    \end{equation}
+    Again, we see that this is a symmetry of $\LL$ because there is no explicit time-dependence in the Lagrangian. Noether tells us that this implies \emph{energy conservation}.
+    \item Rotational invariance:
+    \begin{equation}
+        \v{x}_i \to R\v{x}_i
+    \end{equation}
+    for a rotation matrix $R$, i.e. that satisfying $RR^t = R^tR = \II$. The origin of this symmetry is that there is no preferred direction in space. Noether tells us that this implies \emph{angular momentum conservation}.
+    \item Boost invariance:
+    \begin{equation}
+        \v{x}_i \to \v{x}_i - \v{v}t
+    \end{equation}
+    The previous 3 symmetries seem so robust that it seems like things cannot go wrong. Indeed, it is this fourth symmetry that must be modified when we consider the Maxwell theory. What this symmetry means is if we take the entire system and put it on a train going on a constant velocity relative to us, the physics of the system look the same (e.g. if we take the solar system and put it on a galactic train, the motion of the planets are left invariant).
+\end{enumerate}
+What about other transformations that depend on time? For example a transformation that depends on $t^2$? This would not be a symmetry - indeed we can feel if we are in an airplane and we are accelerating. This leads to the notion of an inertial frame. If we have some frame in which Newton's equations are valid, then any other frame that differs from our original frame via a boost will also be inertial. But accelerating frames are not inertial.
+
+\subsection{Symmetry Group, Invariants of Classical Mechanics}
+The symmetry group describing the symmetries of classical mechanics is the Galilean group. It is 10-dimensional; there are:
+\begin{itemize}
+    \item 3 spatial translation symmetries
+    \item 1 time translation symmetry
+    \item 3 rotation symmetries
+    \item 3 boost symmetries
+\end{itemize}
+Side note - people like to divide the Galilean group into the homogenous Galilean group (rotations and boosts - which map coordinates under linear combinations of coordinates) and the inhomogenous Galilean group (space and time translations).
+
+Consider two points in space + time - $(t_1, \v{x}_1), (t_2, \v{x}_2)$ (say, what time your alarm clock went off and what time you got out of bed). What combination of these coordinates are invariants?:
+\begin{itemize}
+    \item $\Delta t = t_2 - t_1$ is invariant under all of the above transformations.
+    \item $\Delta x = \abs{\v{x}_2 - \v{x}_2}$ - is not invariant under boosts, as under $\v{x}' = \v{x} - \v{v}t$ we have:
+    \begin{equation}
+        \abs{\v{x}_2' - \v{x}_1'} = \abs{(\v{x}_2 - \v{v}t_2) - (\v{x}_1 - \v{v}t_1)} = \abs{\v{x}_2 - \v{x}_1 - \v{v}(t_2 - t_1)} \neq \abs{\v{x}_2 - \v{x}_1}
+    \end{equation}
+    However, if $t_1 = t_2$ then it is indeed an invariant.
+\end{itemize}
+
+\subsection{Generalization to Fields}
+We now think about how to generalize these symmetries to fields. Consider the wave equation, which you saw in PHYS 322:
+\begin{equation}\label{eq:waveeq}
+    \square \phi(\v{x}, t) \coloneqq (-\frac{1}{c^2}\p_t^2 + \nabla^2)\phi(\v{x}, t) = 0
+\end{equation}
+Actually, we don't need to go to Maxwell/electromagnetic theory to see this; the wave equation already appears in classical mechanics, e.g. to describe waves on guitar strings, water etc.
+
+The solutions to the wave equation are:
+\begin{equation}
+    \phi(\v{x}, t) = Ce^{i\v{k} \cdot \v{x} - \omega t}, \quad \omega = c\abs{\v{k}}
+\end{equation}
+where $c$ is the speed of propagation in the medium and $C$ some arbitrary multiplicative constant. Let's consider again the symmetries of our discrete classical theory and see what the effects of the transformations are.
+\begin{itemize}
+    \item Translations: if we take $\v{x} \to \v{x} + \v{a}, t \to t + t_0$, then we have:
+    \begin{equation}
+        \phi(\v{x}, t) \to \phi(\v{x} + \v{a}, t + t_0) = Ce^{i\v{k} \cdot(\v{x} + \v{a}) - i\omega(t + t_0)} = Ce^{i\v{k} \cdot \v{a} - i\omega t_0}e^{i\v{k} \cdot \v{x} - i\omega t}
+    \end{equation}
+    The translation simply yields a multiplicative constant/phase which is yet another solution to the wave equation.
+    \item With boosts the story is different. Taking $\v{x} \to \v{x} - \v{v}t$, we have:
+    \begin{equation}
+        \phi(\v{x}, t) \to \phi(\v{x} - \v{v}t, t) = e^{i\v{k} \cdot \v{x} - i(\omega + \v{k} \cdot \v{v})t}
+    \end{equation}
+    so we have a new $\omega'$:
+    \begin{equation}
+        \omega' = \omega + \v{k} \cdot \v{v}
+    \end{equation}
+    but we require that $\omega' = c\abs{\v{k}}$, and indeed this does not hold generally:
+    \begin{equation}
+        \omega + \v{k} \cdot \v{v} \neq c\abs{\v{k}}
+    \end{equation}
+    unless the $\v{k} \cdot \v{v}$ term vanishes, i.e. the boost is in a perpendicular direction to the direction of propagation of the wave. In other words, while monochromatic waves do map to monochromatic waves, they do not preserve the dispersion relation.
+\end{itemize}
+
+At its face this seems to be a paradox. How is this consistent with the fact that boosts are a symmetry of our classical theory? There was indeed something we hid here - for the wave equation to be valid, the medium needs to be at rest - Eq. \eqref{eq:waveeq} assumes that the medium is at rest, for example (though we could generalize to the case of a moving medium)
+
+Let us restrict ourselves to 1-d for moment and think about this further. Then, the solutions to the wave equation become:
+\begin{equation}
+    \phi(x, t) = e^{ikx - i\omega t}
+\end{equation}
+with boosted solutions:
+\begin{equation}
+    \phi'(x, t) = \phi(x + vt, t) = e^{ikx - i(\omega + kv)t}
+\end{equation}
+so in the boosted frame, it looks like the waves are travelling at speed:
+\begin{equation}
+    V = \frac{\omega + kv}{k} = \frac{\omega}{k} + v = c + v
+\end{equation}
+so we can see the law of composition of velocities emerge.
+
+\subsection{Symmetry actions in Maxwell theory}
+When Maxwell theory was proposed, people that believed that the same discussion holds for electromagnetic waves. As a result they believed two things:
+\begin{enumerate}
+    \item There was an ``Ether'', a frame where the light waves were at rest, analogous to the frame in the previous example where the water waves were at rest.
+    \item The speed of light depends on the frame of reference.
+\end{enumerate}
+Michelson wasted 2 decades of his life trying to measure this effect (at least he got a UChicago building named after him!) and after this sequence of failures, people realized that our understanding needed to be amended. Indeed, the discussion of classical waves we just went through is \emph{not} a feature of electromagnetism. The actual situation is that Maxwell's equations hold in all inertial frames, and the symmetry group of nature is still generated by translations, rotations, and boosts, but the action of boosts is different from the classical case.
+
+As a first step towards generalizing the action, let us remind ourselves how rotations act on monochromatic plane waves. As previously mentioned, we obtain the rotated coordinates via acting on our coordinates with a 3x3 rotation matrix:
+\begin{equation}
+    \v{x}' = R\v{x}
+\end{equation}
+Looking at $\v{k} \cdot \v{x}$:
+\begin{equation}
+    \v{k} \cdot \v{x} = \m{k_x & k_y & k_z}\m{x \\ y \\ z}
+\end{equation}
+If we replace $\v{x}$ with $\v{x}' = R^t\v{x}$ we have:
+\begin{equation}
+    \m{k_x & k_y & k_z}R^t\m{x' \\ y' \\ z'}
+\end{equation}
+We then have the rotated wavenumber:
+\begin{equation}
+    \m{k_x' & k_y' & k_z'} = \m{k_x & k_y & k_z}R^t \implies \m{k_x' \\ k_y' \\ k_z'} = R^t\m{k_x \\ k_y \\ k_z}
+\end{equation}
+
+So - If $\phi(\v{x}, t)$ is a solution to the wave equation, then $\phi'(\v{x}, t)$ (i.e. the solution where each $\v{k}$ is mapped to $\v{k}' = R^t\v{k}$) is also a (different) solution of that equation, which satisfies $\phi'(\v{x}', t) = \phi(\v{x}, t)$. This is an exercise which you can go through at home by taking a general solution and fourier decomposing it and applying the above wavenumber argument to each fourier component.
+
+Now, let's return back to boosts - if we want the wave equation to be invariant under boosts (which it was not using the original definition of boosts), the best way to proceed is the following. We go from a 3-d story to a 3+1-d story:
+\begin{equation}
+    x^\mu = (x^0, x^1, x^2, x^3) = (ct, x, y, z)
+\end{equation}
+Now, we want to generalize the rotations in 3-d space to the full 3+1-d spacetime.
+
+In space, we have the line element:
+\begin{equation}
+    ds^2 = dx^i dx^i = dx^2 + dy^2 + dz^2
+\end{equation}
+where the length of a trajectory is given by (in the 2-d case where $y = y(x)$ so $dy = y'dx$):
+\begin{equation}
+    L = \int ds = \int dx \sqrt{1 + y'^2}
+\end{equation}
+$ds$ is rotationally invariant:
+\begin{equation}
+    ds^2 = dx^idx^i = dx'^i dx'^i
+\end{equation}
+i.e. if you rotate your frame the distance between two points does not change. This is the thing that we generalize to 3+1d. We define the line element:
+\begin{equation}
+    ds^2 = dx^\mu dx^\nu \eta_{\mu\nu} = -(dx^0)^2 + (dx^1)^2 + (dx^2)^2 + (dx^3)^2
+\end{equation}
+with $\eta_{\mu\nu}$ the Minkowski metric:
+\begin{equation}
+    \eta = \text{diag}(-1, 1, 1, 1).
+\end{equation}
+
+How does this help? Let's look at the wave equation. $\phi$ originally was a function of $\v{x}, t$, which we've repackaged into $x^\mu$:
+\begin{equation}
+    \square \phi(x^\mu) = 0, \quad \square = \frac{1}{c^2}\dpd[2]{}{t} + \frac{\partial}{\partial x^i}\frac{\partial}{\partial x^i} = -\p_0^2 + \p_i \p_i = \frac{\partial}{\partial x^\mu}\frac{\partial}{\partial x^\mu}\eta^{\mu\nu}
+\end{equation}
+An important note; previously, indices on coordinates were just an aesthetic choice. But here now one of the signs of the metric is different, so we need to take a little more care with where we put our indices. In particular, given $x^\mu$ we can define:
+\begin{equation}
+    x_\mu = \eta_{\mu\nu}x^\nu
+\end{equation}
+so:
+\begin{equation}
+    x_0 = -x^0, x_i = x^i
+\end{equation}
+Note that this implies that $\frac{\partial}{\partial x^\mu}$ actually carries a lower index. $x^\mu x_\mu$ is Lorentz invariant (note the Einstein summation convention/repeated indices are summed over), and taking its derivative:
+\begin{equation}
+    \frac{\partial}{\partial x^\mu}(x^\nu x_\nu) = 2x_\mu
+\end{equation}
+so since taking the derivative results in an object with a lower index, $\frac{\partial}{\partial x^\mu}$ indeed carries a lower index. This motivates the $\frac{\partial}{\partial x^\mu}\frac{\partial}{\partial x^\mu}\eta^{\mu\nu}$ we wrote in the D'Alambertian.
+
+Note that fortunately, the metric with upper indices is identical to the metric with lower indices:
+\begin{equation}
+    \eta_{00} = -1, \quad \eta_0^{\sp 0} = +1 \implies \eta^{00} = -1
+\end{equation}
+
+This discussion was a bit fast, but we will continue it next class. It's recommended that you read the relevant sections in Wald to refresh yourself on all of this index manipulation.

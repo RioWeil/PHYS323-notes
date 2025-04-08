@@ -1,0 +1,40 @@
+\documentclass[10pt]{article}
+\usepackage{commands}
+\usepackage{slashed}
+% \usepackage{pxfonts}
+\pgfplotsset{compat=1.18}
+\newcommand{\ddpd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\diag}{\text{diag}}
+
+\begin{document}
+\begin{tcolorbox}
+  \begin{center}
+  \begin{Large}
+    \textbf{PHYS 323 (Advanced Electrodynamics II) Notes} \\
+    \vspace{5pt}
+  \end{Large}
+  \begin{large}
+        Rio Weil \\
+\vspace{5pt}
+    \emph{This document was typeset on \today}
+  \end{large}
+  \end{center}
+\end{tcolorbox}
+
+\begin{center}
+  \textbf{Introduction:}
+
+  This is a set of lecture notes taken from UChicago's PHYS 323 (Advanced Electrodynamics II), taught by David Kutasov. Topics covered include...
+\end{center}
+\addtocontents{toc}{\protect\hypertarget{toc}{}}
+\tableofcontents
+
+\newpage
+\input{Lectures/lec1.tex}
+\input{Lectures/lec2.tex}
+\input{Lectures/lec3.tex}
+\input{Lectures/lec4.tex}
+\input{Lectures/lec5.tex}
+
+
+\end{document}

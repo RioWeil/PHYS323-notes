@@ -1,0 +1,220 @@
+\section{Lagrangian for EM field}
+
+In relativistic notation, Maxwell's equations are:
+
+\begin{equation}
+    \p_\mu \tilde{F}^{\mu\nu} = 0
+\end{equation}
+\begin{equation}
+    \p_\mu F^{\mu\nu} = -\mu_0 J^{\nu}
+\end{equation}
+where:
+\begin{equation}
+    F_{\mu\nu} = \p_\mu A_\nu - \p_\nu A_\mu
+\end{equation}
+\begin{equation}
+    \tilde{F}^{\mu\nu} = \frac{1}{2}\e^{\mu\nu\rho\sigma}F_{\rho\sigma}
+\end{equation}
+we then raised the question: could we derive these equations from a Lagrangian?
+
+\subsection{From particles to fields}
+Brief review of classical mechanics of particles - we consider an action:
+\begin{equation}
+    S = \int dt \mathcal{L}(q_i(t), \dot{q}_i(t))
+\end{equation}
+Which, extremizing, we obtain the Euler-Lagrange equations:
+\begin{equation}
+    \dod{}{t}\dpd{\LL}{\dot{q}_i} = \dpd{\LL}{q_i}
+\end{equation}
+which are equivalent to Newton's second law.
+
+We now generalize, in two steps. First, we generalize the generalized coordinates $q_i(t)$ to a field $\phi$:
+\begin{equation}
+    q_i(t) \to \phi(x) = \phi(\v{x}, t)
+\end{equation}
+Comparing to what we had in the case of particle mechanics, instead of the $i$ index we have the position $\v{x}$ - we have a continuous number of degrees of freedom. Field theory is nothing more than classical mechanics of an infinite degrees of freedom.
+
+We can further generalize:
+\begin{equation}
+    \phi(x) \to \phi_i(x)
+\end{equation}
+where $i = 1, \ldots n$. This is not to be confused with the index $i$ for the particle label. This is just saying we have $i = 1, \ldots n$ different fields.
+
+In our application, we take $\phi_i \to A_\mu$. The spacetime index $\mu$ plays the role of $i$. $A_\mu$ is a vector field, and in full gory detail:
+\begin{equation}
+    A_\mu = A_\mu(x^0, x^1, x^2, x^3)
+\end{equation}
+with $\mu = 0, 1, 2, 3$. Lorentz transformations act on both indices.
+
+Comment: this is similar to the role of spin in quantum mechanics; we had wavefunctions $\phi(\v{x}, t)$ which we obtained by solving the Schrodinger equation. When we solved for the energy levels of the hydrogen atom, we likely ignored the fact that the electron had spin. But in the presence of the magnetic field, there is a term in the Hamiltonian that acts on the spin, so we add an extra index $\alpha$ to $\psi_{\alpha}(\v{x}, t)$ where $\alpha = \uparrow, \downarrow$. $\mu$ plays an analogous role - we have spin-1.
+
+Going back to the action, we can write (restricting to just one field for now):
+\begin{equation}
+    S = \int d^4x \mathcal{L}(\phi(x), \p_\mu \phi(x)).
+\end{equation}
+We want to understand what is the analog of the Euler-Lagrange equations? We will follow the same logic in the particle case - we vary the field $\phi$:
+\begin{equation}
+    \phi(x) \to \phi(x) + \delta\phi
+\end{equation}
+where the variation $\delta\phi$ is arbitrary and small\footnote{The proof of the fact that Kusatov has free will is that he can choose any variation he likes, here.}. We then ask by how much does $S(\phi)$ change under the variation, to first order in $\delta \phi$:
+\begin{equation}
+    \begin{split}
+        \delta S &= S(\phi + \delta \phi) - S(\phi) 
+        \\ &= \int d^4x\left[\LL(\phi + \delta \phi, \p_\mu \phi + \p_\mu \delta \phi) - \LL(\phi, \p_\mu \phi)\right]
+        \\ &= \int d^4x\left[\delta \phi \dpd{\LL}{\phi} + \p_\mu \delta\phi\dpd{\LL}{(\p_\mu \phi)}\right]
+        \\ &= \int d^4x\left[\delta \phi \dpd{\LL}{\phi} + \p_\mu\left(\delta \phi \dpd{\LL}{(\p_\mu \phi)}\right) - \delta \phi \p_\mu \dpd{\LL}{(\p_\mu \phi)}\right]
+    \end{split}
+\end{equation}
+Now, the middle term is an integral of a total derivative. We can thus write it as (for $\mu = 0$):
+\begin{equation}
+    \int d^4x \p_0\left[\left(\dpd{\LL}{(\p_0 \phi)}\right)\delta \phi\right] = \left.\int d^3 x \dpd{\LL}{(\p_0 \phi)}\delta\phi \right|_{x^0 = -\infty}^{x^0 = \infty}
+\end{equation}
+and we can choose the variation $\delta\phi$ to go to zero at the boundary of time. This is analogously true for the spatial $\mu$s. Thus the total derivative term drops out, and the variation in the action becomes:
+\begin{equation}
+    \delta S = \int d^4 x \delta \phi(x) \left[\dpd{\LL}{\phi} - \p_\mu \dpd{\LL}{(\p_\mu\phi)}\right] = 0
+\end{equation}
+and if we want this to hold for all variations $\delta \phi(x)$, we thus obtain:
+\begin{equation}
+    \dpd{\LL}{\phi} = \p_\mu\dpd{\LL}{(\p_\mu \phi)}
+\end{equation}
+or in the case of multiple fields:
+\begin{equation}
+    \boxed{\dpd{\LL}{\phi_i} = \p_\mu\dpd{\LL}{(\p_\mu \phi_i)}}
+\end{equation}
+
+\subsection{EM field Lagrangian - no sources}
+We want:
+\begin{equation}
+    S = \int d^4x\mathcal{L}(A_\mu(x), \p_\nu A_\mu(x))
+\end{equation}
+note that the Lagrangian depends on the gauge potential $A_\mu$ as opposed to the electric/magnetic field. We want to get the Maxwell equations out of the Euler-Lagrange equations:
+\begin{equation}
+    \dpd{\LL}{A_\nu} = \p_\mu \dpd{\LL}{(\p_\mu A_\nu)}
+\end{equation}
+What $\LL$ should we choose? First, we have the equation/Bianchi identity:
+\begin{equation}
+    \p_\mu \tilde{F}^{\mu\nu} = 0
+\end{equation}
+but this equation is a triviality. This is just true by the definition of the (dual) field strength. So we don't want this from the Lagrangian. What we actually want to derive from the Lagrangian is:
+\begin{equation}
+    \p_\mu F^{\mu\nu} = -\mu_0 J^\nu
+\end{equation}
+For simplicity, let's start in the case with $J^\nu = 0$. We then want to reproduce:
+\begin{equation}
+    \p_\mu F^{\mu\nu} = \p_\mu(\p^\nu A^\nu - \p^\nu A^\mu) = 0.
+\end{equation}
+$\LL$ should satisfy some properties:
+\begin{itemize}
+    \item  $\LL$ should be Lorentz invariant - this is because $S$ should be Lorentz invariant, and $d^4x$ is Lorentz invariant.
+    \item $\LL$ should be gauge invariant - the Maxwell equation and physics we get out of it should be gauge invariant.
+    \item The Euler-Lagrange equation is linear in $A_\mu$ - thus $\LL$ should be quadratic in $A_\mu$.
+\end{itemize}
+
+Given these conditions, we have only three objects we could conceivably write\footnote{If you can think of another, please tell Kusatov, and he will immediately run to write a paper on it without you.}:
+\begin{itemize}
+    \item $-F_{\mu\nu}F^{\mu\nu}$
+    \item $-F_{\mu\nu}\tilde{F}^{\mu\nu}$
+    \item $-\tilde{F}_{\mu\nu}\tilde{F}^{\mu\nu}$
+\end{itemize}
+Note that $-\tilde{F}_{\mu\nu}\tilde{F}^{\mu\nu}$ is proportional to $-F_{\mu\nu}F^{\mu\nu}$ and so is not a unique possibility, and $-F_{\mu\nu}\tilde{F}^{\mu\nu}$ is a total derivative and so does not contribute to the physics. We thus have one possibility remaining:
+\begin{equation}
+    \LL_{\text{EM}} = -\frac{1}{4\mu_0}F_{\mu\nu}F^{\mu\nu}
+\end{equation}
+The proportionality constant we put there for later convenience, but this is not important for the purposes of the Euler-Lagrange equation. In the next problem set, you can verify that the E-L equation yields precisely $\p_{\mu}F^{\mu\nu} = 0$. This must work - if it did not, there would be no Lagrangian that could possibly works, and we just wasted 2 weeks of your time. Writing $\LL$ in terms of the electromagnetic fields, we have:
+\begin{equation}
+    \LL_{\text{EM}} = \frac{1}{2\mu_0}\left(\frac{1}{2}\abs{\v{E}}^2 - \abs{\v{B}}^2\right)
+\end{equation}
+wherein we can immediately see that the Euler-Lagrange procedure would be doomed to fail if we had used $\v{E}, \v{B}$ as the fundamental degrees of freedom.
+
+\subsection{EM field Lagrangian - with sources}
+If we want to reproduce the case with sources:
+\begin{equation}
+    \p_{\mu}F^{\mu\nu} = -\mu_0 J^\nu
+\end{equation}
+we can simply add the term:
+\begin{equation}
+    \LL = -\frac{1}{4\mu_0}F^{\mu\nu}F_{\mu\nu} + A_\mu J^\mu.
+\end{equation}
+
+But actually there is a problem here. This Lagrangian is \emph{not} gauge invariant. If we perform the gauge transformation:
+\begin{equation}
+    A_\mu \to A_\mu - \p_\mu \chi
+\end{equation}
+Then the Lagrangian picks up a new term:
+\begin{equation}
+    \delta \LL = -J^\mu \p_\mu \chi
+\end{equation}
+
+Is this a problem? Actually, no. What we \emph{really} want is not that $\LL$ is gauge invariant, but that the action $S$ is gauge invariant. In other words, does $\delta S$ from making the gauge transformation vanish?
+\begin{equation}
+    \delta S = \int d^4x \delta \LL = -\int d^4x J^\mu \p_\mu \chi = -\int d^4x \p_\mu[J^\mu \chi]
+\end{equation}
+In the last line, we wrote things as a total derivative; this is valid as:
+\begin{equation}
+    \p_\mu [J^\mu \chi] = (\p_\mu J^\mu)\chi + J^\mu (\p_\mu \chi) = J^\mu (\p_\mu \chi)
+\end{equation}
+as $\p_\mu J^\mu = 0$ (continuity equation/current conservation). Going back to $\delta S$, we can have some discussion about the integral of the total derivative. As we discussed earlier in lecture, this only receives contributions from the boundaries of spacetime. So, the action is invariant under gauge transformations that go to zero rapidly to zero at the boundaries of spacetime. But if we include $\chi$s that do \emph{not} go to zero, we get physically important boundary terms - they are relevant to charge conservation. But in this course we do not consider such cases.
+
+Another point to make - the discussion heavily relies on the fact that the current $J^\mu$ is conserved. If we want the action to be invariant under gauge transformations, we can only couple the electromagnetic field to conserved currents.
+
+\subsection{The stress-energy tensor}
+Now, we can ask what this Lagrangian is good for - of course, we already have the Euler-Lagrange equation; another answer is we can get the stress-energy tensor for the EM field. Why is this physically important? You are already viscerally aware of the fact that particles have energy and momenta. But you also expect that the electromagnetic field also has this property. What is the analogue of the energy/momentum of a bowling ball for an EM wave?
+
+To review, let's just remind ourselves of how things work for particles. There, we have momenta:
+\begin{equation}
+    p_i = \dpd{\LL}{\dot{q}_i}
+\end{equation}
+and the Hamiltonian:
+\begin{equation}
+    \mathcal{H} = p_i \dot{q}^i - \LL
+\end{equation}
+where if the Lagrangian does not depend on time, $\mathcal{H} = E$ is the conserved energy. We want to generalize this discussion to fields. We have the action:
+\begin{equation}
+    S = \int d^4x\LL(\phi, \p_\mu \phi)
+\end{equation}
+and if there is no explicit dependence on $x^\mu$, then we expect that the action is invariant under $x^\mu \to x^\mu + a^\mu$, and so we expect $p_\mu$ to be conserved.
+
+Let us recall the example of electric charge. We have a conserved current:
+\begin{equation}
+    \p_\mu J^\mu = 0.
+\end{equation}
+Why do we care? If we define a charge:
+\begin{equation}
+    Q = \int d^3x J^0(\v{x}, t)
+\end{equation}
+where $\dot{Q} = 0$ as:
+\begin{equation}
+    \dot{Q} = (\text{Const.})\int d^3x\p_0 J^0 = (\text{Const.})\int d^3 x \nabla \cdot \v{J} = 0
+\end{equation}
+where the last equality follows from current conservation if we integrate over all space (if we integrate over a finite region, we keep track of the charge that flows in/out of a region). Note that $Q$ here is a scalar quantity. This is true because $J^\mu$ is a a Lorentz vector.
+
+What about $p^\mu$? What is the conserved current in this case> Here we expect a tensor $T^{\mu\nu}$ which satisfies $p_\mu T^{\mu\nu} = 0$. Why is this the case?
+\begin{equation}
+    p^\nu = \int d^3x T^{0\nu}
+\end{equation}
+so:
+\begin{equation}
+    \dot{p}^\nu = (\text{Const.})\int d^3x \p_0 T^{0\nu} = (\text{Const.})\int d^3x \p_i T^{i\nu} = 0
+\end{equation}
+if we integrate over all space. We want a tensor so that the conserved quantity $p^\nu$ we get out of it is a Lorentz vector.
+
+We define the stress-energy tensor as:
+\begin{equation}
+    T^{\mu\nu} = \dpd{\LL}{(\p_\mu \phi^i)}\p^\nu \phi^i - \eta^{\mu\nu}\LL.
+\end{equation}
+Let us verify that the conservation equation:
+\begin{equation}
+    \p_\mu T^{\mu\nu} = 0
+\end{equation}
+is satisfied.
+\begin{equation}
+    \begin{split}
+        \p_\mu T^{\mu\nu} &= \p_\mu\left(\ddpd{\LL}{(\p_\mu \phi^i)}\p^\nu \phi^i\right) - \eta^{\mu\nu}\p_\mu \LL
+        \\ &= \p_\mu\left(\ddpd{\LL}{(\p_\mu \phi^i)}\right) \p^\nu \phi^i + \dpd{\LL}{(\p_\mu \phi^i)}\p_\mu \p^\nu \phi_i - \p^\nu \LL(\phi^i, \p_\mu \phi^i)
+        \\ &= \ddpd{\LL}{\phi^i} \p^\nu \phi^i + \dpd{\LL}{(\p_\mu \phi^i)}\p_\mu \p^\nu \phi_i - \p^\nu \LL(\phi^i, \p_\mu \phi^i)
+        \\ &= 0
+    \end{split}
+\end{equation}
+where in the third equality we use the Euler-Lagrange equation, and in the last equality we can recognize the terms to cancel out using the chain rule to evaluate the derivative of the Lagrangian.
+
+Next time, we study $T^{\mu\nu}$ for an EM field.
