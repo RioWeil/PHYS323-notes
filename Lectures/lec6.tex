@@ -1,0 +1,234 @@
+\section{Stress Tensor, Angular Momentum, Scale Invariance of EM field}
+
+Last time, we found the Lagrangian and thus action for a field:
+\begin{equation}
+    S = \int d^4x \mathcal{L}(\phi^i, \p_\mu \phi)
+\end{equation}
+we then defined the stress tensor:
+\begin{equation}
+    \tilde{T}^{\mu\nu} = \frac{\delta \LL}{\delta \p_\mu \phi_i}\p^\nu \phi^i - \eta^{\mu\nu}
+\end{equation}
+which is a conserved quantity (from the Euler-Lagrange equations):
+\begin{equation}
+    \p_\mu \tilde{T}^{\mu\nu} = 0
+\end{equation}
+This implies that the momenta:
+\begin{equation}
+    P^\nu = \int d^3x \tilde{T}^{0\nu}
+\end{equation}
+are conserved charges.
+
+\subsection{Specific case of the EM stress tensor}
+
+Today, we see what this looks like in the case of the EM field. We have the Maxwell Lagrangian:
+\begin{equation}
+    \LL_{\text{EM}} = -\frac{1}{4\mu_0}F^{\mu\nu}F_{\mu\nu}
+\end{equation} 
+with:
+\begin{equation}
+    F_{\mu\nu} = \p_\mu A_\nu - \p_\nu A_\mu
+\end{equation}
+\begin{equation}
+    A_\mu \leftrightarrow \phi_i
+\end{equation}
+So the stress-tensor looks like:
+\begin{equation}
+    \tilde{T}^{\mu\nu} = \frac{\delta \LL}{\delta \p_\mu A^\lambda}\p^\nu A_\lambda - \eta^{\mu\nu}\LL_{\text{EM}}
+\end{equation}
+from our general argument last class, it is automatically true that:
+\begin{equation}
+    \p_\mu \tilde{T}^{\mu\nu} = 0
+\end{equation}
+Computing the stress tensor from the Lagrangian:
+\begin{equation}
+    \tilde{T}^{\mu\nu} = \frac{1}{\mu_0}F^{\mu\lambda}\p^\nu A_\lambda - \eta^{\mu\nu}\LL_{\text{EM}}
+\end{equation}
+
+\subsection{Issues with the Definition \& Resolution}
+There are two problems:
+\begin{itemize}
+    \item $\tilde{T}^{\mu\nu}$ is not gauge invariant.
+    \item $\tilde{T}^{\mu\nu} \neq \tilde{T}^{\nu\mu}$.
+\end{itemize}
+Why is the second one a problem? Well, there \emph{should} exist a symmetric $T^{\mu\nu}$. 
+
+Suppose we put electromagnetism on a curved spacetime with arbitrary metric $g^{\mu\nu}$. In that case, our Maxwell Lagrangian takes the form:
+\begin{equation}
+    \LL_{\text{EM}} = -\frac{1}{4\mu_0}g^{\mu\alpha}g^{\nu\beta}F_{\mu\nu}F_{\alpha\beta}\sqrt{-g}
+\end{equation}
+where $g = \det g_{\mu\nu}$. I can then define the stress tensor in an alternative fashion:
+\begin{equation}
+    T^{\mu\nu} = -\frac{2}{\sqrt{-g}}\frac{\delta \LL_{\text{EM}}}{\delta g_{\mu\nu}}
+\end{equation}
+The claim is that this stress tensor also satisfies the conservation equation:
+\begin{equation}
+    \p_\mu T^{\mu\nu} = 0
+\end{equation}
+if you're familiar with GR, you wouldn't be surprised by this fact, because the stress tensor is how the metric couples to matter.
+
+Why all of this sidetracking? This new stress tensor is gauge invariant (we get it by taking the functional derivative of a gauge-invariant $\LL$ with respect to a gauge invariant metric) and also is manifestly symmetric (the metric is symmetric).
+
+Let's now try to compute $T^{\mu\nu}$ using this new definition and then see how it differs with our previous result:
+\begin{equation}
+    T_{\mu\nu} = \frac{1}{\mu_0}\left(F_{\mu}^{\sp\alpha}F_{\nu\alpha} - \frac{1}{4}\eta_{\mu\nu}F_{\alpha\beta}F^{\alpha\beta}\right)
+\end{equation}
+
+A short calculation shows that the difference between $T^{\mu\nu}, \tilde{T}^{\mu\nu}$ is:
+\begin{equation}
+    T^{\mu\nu}_{\Delta} \cong F^{\mu\lambda}\p_\lambda A^\nu
+\end{equation}
+The question then becomes - is $T^{\mu\nu}_{\Delta}$ something that has a physical consequence?
+\begin{itemize}
+    \item It's clear that $\p_\mu T^{\mu\nu}_{\Delta} = 0$ as:
+    \begin{equation}
+        \p_\mu T^{\mu\nu}_{\Delta} = \p_\mu (T^{\mu\nu} - \tilde{T}^{\mu\nu}) = \p_\mu T^{\mu\nu} - \p_\mu \tilde{T}^{\mu\nu} = 0 - 0 = 0
+    \end{equation}
+    but we can check it explicitly:
+    \begin{equation}
+        \p_\mu T^{\mu\nu}_{\Delta} = (\p_\mu F^{\mu\nu})\p_\lambda A^\nu + F^{\mu\nu}\p_\mu \p_\lambda A^\nu = 0 + 0 = 0
+    \end{equation}
+    The first term vanishes via the source-free Maxwell equation, and the second term vanishes as we multiply a symmetric $\p_\mu \p_\lambda A^\nu $ by an antisymmetric $F^{\mu\nu}$.
+
+    \item $\int d^3x T^{0\nu}_{\Delta} = 0$ as it is an integral of a total derivative:
+    \begin{equation}
+        T^{0\nu}_\Delta = \p_\lambda(F^{0\lambda}A^\nu)
+    \end{equation}
+    The $\lambda = 0$ term is absent in this sum (as $F^{00} = 0$) and the other terms are spatial derivatives - i.e. a total derivative which vanishes (assuming no boundary terms) when integrated over all space.
+\end{itemize}
+The upshot is that the two definitions are physically equivalent.
+
+\subsection{Intepreting the Stress-Energy Tensor}
+What interpretation does the stress-energy tensor (and its conservation) have? The $00$ component can be interpreted as the energy density:
+\begin{equation}
+    T_{00} = \frac{1}{2\mu_0}\left(\frac{1}{c^2}\abs{\v{E}}^2 + \abs{\v{B}}^2\right) = \frac{\e_0}{2}\abs{\v{E}}^2 + \frac{1}{2\mu_0}\abs{\v{B}}^2
+\end{equation}
+The $0i$ component looks like:
+\begin{equation}
+    T_{0i} = T_{i0} = \frac{1}{\mu_0 c}\left(\v{E} \times \v{B}\right)_i
+\end{equation}
+where $-\frac{T_{0i}}{c}$ has interpretation as the momentum density. It has another role; $-cT_{0i}$ is the Poynting vector, which is the energy flux of the EM field.
+
+Recall:
+\begin{equation}
+    P^0 = \int d^3x T^{00} \implies \dot{P}^0 = \int d^3x \dot{T}^{00}
+\end{equation}
+and the conservation of the stress-energy tensor tells us:
+\begin{equation}
+    \p_\mu T^{\mu0} = 0 \implies \p_0 T^{00} + \p_i T^{i0} = 0
+\end{equation}
+so $T^{i0}$ (from conservation) tells us about the energy flux.
+
+\subsection{Rotational Invariance}
+The fact that Maxwell theory is rotationally invariant implies by Noether's theorem that there is a conserved angular momentum. Just as there was energy/momentum conservation arising from time/space translation invariance, there must be an analogous story here. One way to think about this is the following. Lorentz symmetry implies that there are conserved charges for both boosts and rotations. In 3+1D, there are 3 boosts and 3 rotations, so we should have 6 conserved charges arising from Lorentz symmetry. We could then ask how these charges transform under Lorentz transformations. $P^\mu$ transformed as a vector (1 energy + 3 momentum components) under Lorentz transformations. We might at first be puzzled by the 6 components we see here, but this is analogous to the 3 + 3 components of the $\v{E}/\v{B}$ field which we packaged into a $4\times 4$ antisymmetric tensor - we do the same here, and expect a tensor $M_{\mu\nu}$ where $M_{0i}$ correspond to boosts and $M_{ij}$ correspond to rotations. We expect that there are conserved charges $L_i$ that satisfy:
+\begin{equation}
+    M_{ij} = \e_{ijk}L_k
+\end{equation}
+
+All of this is to say - if we are interested in constructing the angular momentum charge carried by some electromagnetic field, we have to understand how to get these from Lorentz symmetry.
+
+\begin{itemize}
+    \item The electric charge $Q$ corresponds to a conserved current $J^\mu$ (satisfying $\p_\mu J^\mu = 0$).
+
+    \item The energy/momentum $P^\mu$ correspond to a conserved stress-energy tensor $T^{\mu\nu}$ (a current satisfying $\p_\mu T^{\mu\nu} = 0$).
+    
+    \item So the angular momentum + the charges associated to boosts $M^{\nu\lambda}$ correspond to a conserved 3-index tensor $M^{\mu\nu\lambda}$ (a current satisfying $\p_\mu M^{\mu\nu\lambda}$).
+\end{itemize}
+A hint from classical mechanics is that $\v{L} = \v{r} \times \v{p}$. So a good guess would be to take the stress-energy tensor and multiply it by a factor of position to get the $M^{\mu\nu\lambda}$. Indeed:
+\begin{equation}
+    M^{\mu\nu\lambda} = T^{\mu\nu}x^\lambda - T^{\mu\lambda}x^\nu
+\end{equation}
+Indeed this satisfies:
+\begin{equation}
+    \p_\mu F^{\mu\nu\lambda} = 0
+\end{equation}
+to check this, note the relation:
+\begin{equation}
+    \p_\mu x^\lambda = \ddpd{x^\lambda}{x^\mu} = \eta^{\lambda}_{\sp\mu}.
+\end{equation}
+Now calculating:
+\begin{equation}
+    \begin{split}
+        \p_\mu M^{\mu\nu\lambda} &= (\p_\mu T^{\mu\nu}) x^\lambda + T^{\mu\nu}(\p_\mu x^\lambda) - (\p_\mu T^{\mu\lambda})x^\nu - T^{\mu\lambda}(\p_\mu x^\nu)
+        \\ &= 0 + T^{\mu\nu}\eta^{\lambda}_{\sp\mu} - 0 - T^{\mu\lambda}\eta^{\nu}_{\sp\mu}
+        \\ &= T^{\lambda\nu} - T^{\nu\lambda}
+        \\ &= 0
+    \end{split}
+\end{equation}
+where the last equality follows from the fact that $T^{\mu\nu}$ is symmetric. Hence the current is indeed conserved. Using this, we can write down a formula for the angular momentum for an EM field.
+
+\begin{equation}
+    \v{L} = \e_0 \int d^3x \v{x} \times (\v{E} \times \v{B})
+\end{equation}
+
+This makes perfect sense. In fact, we already knew what the momentum density was, and we knew the angular momentum was $\v{L} = \v{r} \times \v{p}$.
+
+\subsection{Scale Invariance}
+% Another, slightly more subtle symmetry of the EM field is that it is invariant under scale transformations. 
+We observe that $T^{\mu\nu}$ is traceless:
+\begin{equation}
+    T_{\mu}^{\sp\mu} = T_{\mu\nu}\eta^{\mu\nu} = 0
+\end{equation}
+what is the significance of this fact? We can write down a conserved current:
+\begin{equation}
+    J^\mu_{D} = T^{\mu\nu}x_\nu
+\end{equation}
+and the nice part about this definition is that:
+\begin{equation}
+    \p_\mu J^{\mu}_D = 0
+\end{equation}
+Which if we explicitly work out:
+\begin{equation}
+    \p_\mu (T^{\mu\nu}x_\nu) = (\p_\mu T^{\mu\nu})x_\nu + T^{\mu\nu}(\p_\mu x_\nu) = 0 + T^{\mu\nu}\eta_{\mu\nu} = 0
+\end{equation}
+the conservation follows from the traceless condition.
+
+What symmetry of the action gives rise to this conserved current?
+\begin{equation}
+    S_{\text{EM}} = -\frac{1}{4\mu_0}\int d^4x F^{\mu\nu}F_{\mu\nu}
+\end{equation}
+As the title of this section gives away, the action is invariant under the rescaling:
+\begin{equation}
+    x' = \alpha x, \quad A'_\mu(x') = \frac{1}{\alpha}A_\mu(x)
+\end{equation}'
+Let's work this out:
+\begin{equation}
+    S'_{\text{EM}} = -\frac{1}{4\mu_0}\int d^4x' F_{\mu\nu}'(x')F'^{\mu\nu}(x')
+\end{equation}
+where:
+\begin{equation}
+    F_{\mu\nu}'(x') = \ddpd{A'_\nu}{x'^\mu} - \ddpd{A'_\mu}{x'^\nu} = \frac{1}{\alpha^2}F_{\mu\nu}(x)
+\end{equation}
+So then:
+\begin{equation}
+    F'^2 = \frac{1}{\alpha^4}F^2
+\end{equation}
+and the measure also gets rescaled:
+\begin{equation}
+    d^4x' = \alpha^4 d^4x
+\end{equation}
+So the $\alpha^4$s cancel and so:
+\begin{equation}
+    S'_{\text{EM}} = S_{\text{EM}}
+\end{equation}
+for any $\alpha$. Our conserved current associated to this symmetry (dilations) is $J^\mu_D$.
+
+Three comments about this story:
+\begin{itemize}
+    \item Remarkably, the scale invariance works out perfectly in 4-dimensions - we use the dimensionality when rescaling the measure - but things do not work the same in lower/higher dimensions.
+    \item We can view the entire scale invariance story as follows. We can assign scaling dimensions to quantities. If $\theta \to \frac{1}{\alpha^n}\theta$, then $\theta$ is said to have scaling dimension $n$. Since $x \to \alpha x$, $[x] = -1$, and analogously $[A_\mu] = +1, [P^\mu] = +1$ and so on. The action has $[S] = 0$, which means it is invariant - this is because $[d^4x] = -4$ and $[F_{\mu\nu}] = [\p A] = 1 + 1 = 2$ (from the derivative and from $A$). So $[S] = 0$ comes from $[S] = [F^2] + [d^4x] = 2 \cdot 2 - 4 = 0$.
+    \item When we couple to charged matter, formally we still have the symmetry. How to see this? We have in this case that:
+    \begin{equation}
+        \delta \LL = A_\mu J^\mu
+    \end{equation}
+    if we want $[\delta \LL] = +4$ so as to retain the scale invariance (cancel out the $-4$ from the measure), then since $[A_\mu] = +1$, we want $[J^\mu] = +3$. Superficially, it looks like we land on our feet because:
+    \begin{equation}
+        Q =  \int d^3x J^0
+    \end{equation}
+    Since charge is not measured in meters/is invariant under rescaling, and then $[Q] = 0$ and $[d^3x] = -3$ so $[J] = +3$. But actually, this is a little bit too naive, and we will things break when we couple charged particles to the EM field. If we recall the dispersion:
+    \begin{equation}
+        E^2 = (pc)^2 + (mc^2)^2
+    \end{equation}
+    the dispersion is scale-invariant if $m = 0$ but otherwise is not scale invariant (as the mass gets rescaled) - dilations are not a symmetry.
+\end{itemize}
+
+Our next topic (next week) is discussing how plane waves look like in relativistic variables - we will see that they look quite elegant.
