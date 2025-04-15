@@ -1,0 +1,282 @@
+\section{Plane Waves, Charged Particles Coupled to EM Fields}
+
+\subsection{Plane Waves}
+You've already seen plane waves before, but here we discuss it in the Lorentz covariant formalism.
+
+Recall Maxwell's equations:
+\begin{equation}
+    \p_\mu F^{\mu\nu} = 0
+\end{equation}
+\begin{equation}
+    F_{\mu\nu} = \p_\mu A_\nu - \p_\nu A_\mu
+\end{equation}
+with the gauge potential:
+\begin{equation}
+    A_\mu = \left(-\frac{\phi}{c}, A_1, A_2, A_3\right)
+\end{equation}
+In the Lorenz gauge, we have:
+\begin{equation}
+    \frac{1}{c^2}\dot{\phi}^2 + \nabla \cdot \v{A} = 0
+\end{equation}
+in our four-vector notation this takes the elegant and manifestly Lorentz\footnote{Kutasov: This looks like a private joke by God...} covariant form:
+\begin{equation}
+    \p_\mu A^\mu = 0
+\end{equation}
+The reason why Wald likes the Lorentz gauge is that in this gauge, the four components of $A^\mu$ satisfy the wave equation:
+\begin{equation}
+    \square A^\mu = 0
+\end{equation}
+where:
+\begin{equation}
+    \square = \eta^{\mu\lambda}\p_\nu \p_\lambda = \p_\nu\p^\nu 
+\end{equation}
+
+In our new formalism, we can write a monochromatic wave as:
+\begin{equation}
+    A_\mu = \xi_\mu e^{ik_\nu x^\nu}
+\end{equation}
+With $\xi_\mu$ the polarization vector. The wave equation then says that:
+\begin{equation}
+    k^\mu k_\mu = 0
+\end{equation}
+and hence that:
+\begin{equation}\label{eq:waveeqcondition}
+    k_0^2 = \abs{\v{k}}^2
+\end{equation}
+The frequency of the wave by definition is:
+\begin{equation}
+    \omega = ck_0
+\end{equation}
+So Eq. \eqref{eq:waveeqcondition} is nothing more than a statement of the wave dispersion:
+\begin{equation}
+    \omega = c\abs{\v{k}}
+\end{equation}
+
+\subsection{Polarizations}
+What do we know about $\xi_\mu$? It consists of 4 numbers... but we do not expect these to be independent, given that electromagnetic waves have 2 polarizations. Further, we notice that we have not yet imposed the Lorentz gauge to see how they could become constrained. If we do, we find:
+\begin{equation}
+    \xi_\mu k^\mu = 0
+\end{equation}
+This condition brings the 4 independent numbers down to 3. We still aren't done yet. The thing we forgot is slightly subtle. We recall that gauge symmetry is the condition that the transformation:
+\begin{equation}
+    A_\mu \to A_\mu + \p_\mu \chi
+\end{equation}
+leaves the physics invariant. When we impose the Lorentz gauge, we have fixed the arbitrariness... or have we? Actually, it turns out the Lorentz gauge does not completely fix the gauge freedom. Lorentz gauge says:
+\begin{equation}
+    \p_\mu A^\mu = 0
+\end{equation}
+and if we want gauge invariance:
+\begin{equation}
+    \p_\mu (A^\mu + \p^\mu \chi) = 0
+\end{equation}
+in other words, if $\xi$ satisfies the wave equation:
+\begin{equation}
+    \p_\mu \p^\mu \chi = \square \chi = 0
+\end{equation}
+then we may add $\p_\mu \chi$ to $A_\mu$ - this tells us that we have residual gauge invariance. This is a bit interesting - precisely when the $A^\mu$ is on shell, i.e. when it satisfies the Maxwell equations, the residual gauge freedom kicks in.
+
+If we have $A_\mu = \xi_\mu e^{ik_\nu x^\nu}$ with $k_\mu k^\mu = 0$, then we can add to it the four-derivative ($\p^\mu$) of:
+\begin{equation}
+    \chi = \chi_0 e^{ik_\nu x^\nu}
+\end{equation}
+This tells us that we can shift:
+\begin{equation}
+    \xi_\mu^{(k)} \to \xi_\mu^{(k)} + k_\mu \chi_0^{(k)}
+\end{equation}
+where we have added the $(k)$ label to denote that it is the polarization corresponding to a particular wavevector.
+
+In summary: plane waves are described by Gauge fields of the form:
+\begin{equation}
+    A_\mu = \xi_\mu^{(k)}e^{ik_\nu x^\nu}
+\end{equation}
+where we have the three conditions:
+\begin{equation}
+    k^2 = k_\mu k^\mu = 0
+\end{equation}
+\begin{equation}
+    k_\mu \xi^{(k)\mu} = 0
+\end{equation}
+\begin{equation}
+    \xi_\mu^{(k)} \sim \xi_\mu^{(k)} + k_\mu \e^{(k)}
+\end{equation}
+We can now ask how many independent components of $\xi_\mu$ we have. Suppose we have:
+\begin{equation}
+    k_\mu = (k, 0, 0, k)
+\end{equation}
+i.e. a wave propagating in the $z$-direction. Let's check the three conditions. $k^2 = 0$ is clearly satisfied. The second condition is:
+\begin{equation}
+    k_0\xi^0 + k_3 \xi^3 = 0 \implies \xi^0 + \xi^3 = 0 \implies \xi^0 = -\xi^3
+\end{equation}
+The last condition is:
+\begin{equation}
+    \xi_0 \sim \xi_0 + k_0 \e = \xi_0 + k\e
+\end{equation}
+\begin{equation}
+    \xi_3 \sim \xi_3 + k_3 \e = \xi_3 + k\e
+\end{equation}
+So together:
+\begin{equation}
+    \xi_0 = \xi_3 = 0
+\end{equation}
+and hence we have the remaining two independent polarizations $\xi = (0, 1, 0, 0)$ and $\xi = (0, 0, 1, 0)$.
+
+\subsection{Lagrangian of Charged Particle Coupled to EM Field - Consistency conditions}
+Thus far, we have looked at the action for a free relativistic particle, as well as for free EM fields. Now, we want to study the Lagrangian for a charged particle coupled to an EM field.
+
+Recall the Lagrangian for a free particle:
+\begin{equation}
+    S_0 = -mc\int d\lambda \sqrt{-\dot{x}_\mu \dot{x}^\mu}
+\end{equation}
+or in the gauge $t(\lambda) = \lambda$:
+\begin{equation}
+    S_0 = -mc^2 \int dt\sqrt{1-\frac{\v{v}^2}{c^2}}
+\end{equation}
+
+Now, we ask what about charged particles? We write down a natural extension\footnote{But be wary, things that are natural are not automatically correct...}:
+\begin{equation}
+    \delta S = \alpha\int d\lambda \dot{x}^\mu A_\mu(x)
+\end{equation}
+We will find that this is reparametrization invariant, gauge invariant, it is manifestly Lorentz invariant (the $\mu$ indices are contracted), and has other properties we require. $\alpha$ appearing in the above is a constant we will determine.
+
+Recall reparameterization invariance:
+\begin{equation}
+    \int d\lambda \frac{dx^\mu}{d\lambda} \stackrel{\lambda\to f(\lambda)}{=} \int df(\lambda)\frac{dx^\mu}{df(\lambda)}
+\end{equation}
+where if $x^\mu = x^\mu(f(\lambda))$ then:
+\begin{equation}
+    \frac{dx^\mu}{d\lambda} = \frac{dx^\mu}{df(\lambda)}\frac{df}{d\lambda}
+\end{equation}
+This is satisfied by our proposed $\delta S$.
+
+Now, let's think about Gauge invariance; under transformations:
+\begin{equation}
+    A_\mu \to A_\mu - \p_\mu \chi
+\end{equation}
+The Lagrangian does \emph{not} look invariant under this. But we recall back to our discussion last week - it is not the Lagrangian that we require to be gauge invariant, but rather the action. Under the gauge transformation, we have (up to some constants that we ignore):
+\begin{equation}
+    \delta S \to \delta S + (\text{const.})\int d\lambda \dot{x}^\mu \p_\mu \chi
+\end{equation}
+Looking at this newly generated term
+\begin{equation}
+    \int_{\lambda_1}^{\lambda_2} d\lambda \dot{x}^\mu \p_\mu \chi \stackrel{\text{chain rule}}{=} \int_{\lambda_1}^{\lambda_2} d\lambda \dod{}{\lambda}\chi(x^\mu(\lambda)) = \left.\chi(x^\mu(\lambda))\right|_{\lambda_1}^{\lambda_2}
+\end{equation}
+So, the variation only depends on the values of $\chi$ at the boundaries of spacetime - it is thus independent of the local form of $\chi(x^\mu)$. Hence, we conclude that this new term we add to the action is indeed gauge invariant.
+
+\subsection{Fixing the coefficient}
+Now, we ask what is the constant $\alpha$? Let us compare it to:
+\begin{equation}
+    \int d^4 x A_\mu(x)J^\mu(x)
+\end{equation}
+where the multiplicative constant was constrained by what we wanted on the RHS of the Maxwell equations. Writing the full action (free part + interacting part):
+\begin{equation}
+    S = \int d\lambda(-mc\sqrt{-\dot{x}_\mu \dot{x}^\mu} + \alpha\dot{x}^\mu A_\mu(x))
+\end{equation}
+Taking $\lambda = t$:
+\begin{equation}
+    S = \int dt\left[-mc^2\sqrt{1-\frac{\dot{\v{x}}^2}{c^2}} - \alpha \phi + \alpha \dot{\v{x}}\cdot \v{A}\right]
+\end{equation}
+Just from this form, it looks like we should make $\alpha = q$. Why? The first term at low velocity looks like the mass energy + low-velocity kinetic energy of the particle, and the terms involving the gauge potentials are just the energy from the interaction of the electric field and the charge of the particle as you saw last quarter.
+
+But let us see this another way. We can calculate the momentum, using the Lagrangian:
+\begin{equation}
+    p^i = \frac{\delta \LL}{\delta \dot{x}_i} = \frac{m\dot{x}^i}{\sqrt{1 - \frac{\v{v}^2}{c^2}}} + \alpha A^i
+\end{equation}
+Now, if I go look into your notes for your quantum mechanics class (taking the $\abs{\v{v}} \ll c$ limit) we find $\alpha = q$.
+
+\subsection{Lorentz Force Law}
+From the definitions, you can check (and perhaps will soon, on a pset) that the EL equations take the following form:
+\begin{equation}
+    \dod{\v{p}}{t} = q(\v{E} + \v{v} \times \v{B})
+\end{equation}
+where:
+\begin{equation}
+    \v{p} = m\gamma\v{v}
+\end{equation}
+\begin{equation}
+    \v{E} = -\nabla \phi - \dot{\v{A}}
+\end{equation}
+\begin{equation}
+    \v{B} = \nabla \times \v{A}
+\end{equation}
+
+A couple comments; first, since our Lagrangian is Lorentz invariant, the Lorentz force law that we get out of it must be Lorentz invariant. It doesn't look manifestly so, but we can write it in this way. First, we can define the proper time $\tau$ via:
+\begin{equation}
+    c^2 d\tau^2 = -dx^\mu dx_\mu
+\end{equation}
+This definition is interesting because we can define:
+\begin{equation}
+    u^\mu = \frac{dx^\mu}{\tau}
+\end{equation}
+for which:
+\begin{equation}
+    u^\mu u_\mu = -c^2
+\end{equation}
+is an invariant. We can then show:
+\begin{equation}
+    \frac{du^\mu}{d\tau} = -\frac{q}{\gamma m}F^{\mu\nu}u_\nu
+\end{equation}
+which is a Lorentz covariant form of the Lorentz force law.
+
+\subsection{Charge Density and Current}
+Another comment; we already had the coupling:
+\begin{equation}\label{eq:AJ}
+    \int d^4x A_\mu(x)J^\mu(x)
+\end{equation}
+and writing down a reasonable choice for $J^\mu$ for a point particle we could have derived:
+\begin{equation}
+    q\int d\lambda A_\mu(x)\dot{x}^\mu
+\end{equation}
+but having derived it independently, we can go the opposite direction, and derive what $J^\mu$ for a point particle is from this expression. You can convince yourself that:
+\begin{equation}
+    \rho(t, \v{x}) = q\delta(\v{x} - \v{x}(t))
+\end{equation}
+\begin{equation}
+    \v{J}(t, \v{x}) = q\dod{\v{x}}{t}\delta(\v{x} -\v{x}(t))
+\end{equation}
+where a delta function of vectors is defined as:
+\begin{equation}
+    \delta(\v{x} - \v{x}(t)) = \delta(x - x(t))\delta(y - y(t))\delta(z - z(t))
+\end{equation}
+Therein:
+\begin{equation}
+    \int_V d^3x\rho(\v{x}, t) = \begin{cases}
+        q & \v{x}(t) \in V
+        \\ 0 & \text{otherwise}
+    \end{cases}
+\end{equation}
+as it should. $\v{J}$ is the quantity that keeps track of what happens when the particle goes inside the volume. You can check that this expression correctly satisfies the continuity equation:
+\begin{equation}
+    \dot{\rho} + \nabla \cdot \v{J} = 0
+\end{equation}
+You can also check that if you take the $J^\mu$ and substitute it into Eq. \eqref{eq:AJ}, the integral localizes onto the worldline of the particle. 
+
+\subsection{Charged Particle Motion in Constant Electric Field}
+We first study the case of $\v{B} = 0, \v{E} = E\xhat$. Now, we want to find the trajectory $\v{x}(t)$ of a particle of charge $q$ in such an $\v{E}$-field. Take $\v{x}(t=0) = 0$ and $\dot{\v{x}}(t=0) = 0$. It is clear that $y(t) = z(t) = 0$ for all $t$; the motion is along the $x$ axis. Now, we have the equation of motion:
+\begin{equation}
+    \dod{}{t}(\gamma v) = \frac{q}{m}E
+\end{equation}
+where $\gamma = \frac{1}{\sqrt{1-\frac{v^2}{c^2}}}$. $\gamma v$ is linear in time, so:
+\begin{equation}
+    \gamma v = \frac{q}{m}Et 
+\end{equation}
+where there is no $t = 0$ constant at the velocity is 0 at $t=0$. We can now solve for $v$ from the above:
+\begin{equation}
+    v(t) = \frac{\frac{qE}{m}t}{\sqrt{1 + \left(\frac{qE}{mc}t\right)^2}}
+\end{equation}
+Then integrating to get $x(t)$:
+\begin{equation}
+    x(t) = \frac{mc^2}{qE}\left(\sqrt{1 + \left(\frac{qEt}{mc}\right)^2} - 1\right)
+\end{equation}
+If you see someone who wants to spend 20 billion dollars on a collider, this is what they have to deal with\footnote{But better than spending 20 trillion dollars on some trade war, but that's not our place here to discuss...}. For $\frac{qEt}{mc} \ll 1$, the velocity/position is:
+\begin{equation}
+    v(t) \approx \frac{qEt}{m}, \quad x(t) \approx \frac{1}{2}\frac{qE}{m}t^2
+\end{equation}
+and grows linearly/quadratic in time. The acceleration is $\frac{qE}{m}$ and all velocities are $v \ll c$. This is the familiar expression from high school.
+
+But as time goes by, we get to the other regime where $\frac{qEt}{mc} \gg 1$. Then, we have that:
+\begin{equation}
+    v(t) \approx c,\quad  x(t) \approx ct
+\end{equation}
+so we keep applying an electric field, but the particle is no longer accelerating $(a \approx 0)$. It is effectively like the $\gamma$ factor makes the effective mass of the object larger and larger, and it can no longer be accelerated further.
+
+Next time, we look at the scenario of the constant magnetic field, and then we get into radiation from accelerating particles.
