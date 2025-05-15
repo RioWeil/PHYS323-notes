@@ -1,0 +1,214 @@
+\section{Magnetohydrodynamics (MHD)}
+
+\subsection{Assumptions of the Theory}
+Today, we answer the question - what happens when we take a plasma and subject it to a large magnetic field $\v{B}$? We make the following set of assumptions
+
+\begin{itemize}
+    \item The plasma can be treated as a fluid (what this means in practice will soon be discussed).
+    \item This fluid is conducting.
+    \item The motion of the fluid is non-relativistic.
+    \item $\v{E}(\v{x}, t), \v{B}(\v{x}, t), \v{v}(\v{x}, t)$ - we've erased the $\avg{\cdot}$ signs on $\v{E}, \v{B}$ to be uniform with the literature (in actuality, all are averaged). We want all three fields to vary slowly on microscopic timescales. What is this? Well, our plasma is a bunch of free electrons moving under the influence of $\v{B}$. We have a collision time $\tau$, as well as a circular motion period $T$. We assume that the fields vary slowly with respect to these.
+\end{itemize}
+
+\subsection{Maxwell theory}
+We take an opposite approach to what we did before; previously we said $\rho_f = 0, \v{J}_f = \v{0}$ and folded this all into the dipole moment $\v{p}$. Now, we take $\rho_f, \v{J}_f$ to be the heroes of the story.
+
+Before, if we had an electron moving with velocity $\v{v}$, we interpreted this as a dipole:
+\begin{equation}
+    \v{p} = -e\v{x}
+\end{equation}
+but now, we say that this gives rise to a current:
+\begin{equation}
+    \v{J} = -e\v{v}
+\end{equation}
+instead of folding it into $\v{p}$. To remind you why this gives rise to the same physics:
+\begin{equation}
+    \avg{\v{J}} = \dpd{\avg{\v{p}}}{t} + \avg{\v{J}_f} + \nabla \times \avg{\v{M}}
+\end{equation}
+Last week, we said that $\avg{\v{J}}$ was zero and we said that $\dpd{\avg{\v{p}}}{t} = -e\v{v}$. Now, we say $\dpd{\avg{\v{p}}}{t} = 0$ and $\avg{\v{J}_f} = -e\v{v}$ (in principle the $\v{v}$s should be averaged, here). Dropping the averages, the Maxwell equations in matter look like:
+\begin{equation}
+    \nabla \cdot \v{B} = 0
+\end{equation}
+\begin{equation}
+    \nabla \times \v{E} + \dot{\v{B}} = 0
+\end{equation}
+\begin{equation}
+    \nabla \cdot \v{D} = \rho
+\end{equation}
+\begin{equation}
+    \nabla \times \v{H} - \dot{\v{D}} = \v{J}
+\end{equation}
+where:
+\begin{equation}
+    \v{D} = \e_0\v{E}
+\end{equation}
+\begin{equation}
+    \v{H} = \frac{1}{\mu_0}\v{B}
+\end{equation}
+
+\subsection{Fluid dynamics}
+In addition to the Maxwell equations, we have the theory of fluids, so let's review some fluid mechanics\footnote{``By review I mean I'll tell you some things you never saw, and I can basically write whatever I want.''}. To this end, we think about the mass density $\rho_m(\v{x}, t)$, the fluid velocity $\v{v}(\v{x}, t)$, and pressure $p(\v{x}, t)$. Again, in principle we put averages everywhere - but its implicitly understood that all of these quantities are averaged over.
+
+Global mass conservation (mass is conserved in the non-relativistic limit) gives the local conservation equation:
+\begin{equation}
+    \dot{\rho}_m + \nabla \cdot (\rho_m\v{v}) = 0
+\end{equation}
+
+We also have the Euler equation:
+\begin{equation}
+    \rho_m\left(\dpd{}{} + \v{v} \cdot \nabla\right)\v{v} = \v{f} - \nabla p
+\end{equation}
+where $\v{f} = \v{f}(\v{x}, t)$ is the force field. One contribution to this is the Lorentz force:
+\begin{equation}
+    \v{f}_L = \rho \v{E} + \v{J} \times \v{B}
+\end{equation}
+and we could also have other forces, e.g. gravity. If you actually take a course on hydrodynamics, they will make a big deal of a term we will neglect, namely viscosity. Including it we get the Navier-Stokes equation.
+
+Note that the Euler equation involves the differential operator:
+\begin{equation}
+    \dod{}{t} = \dpd{}{t} + \v{v} \cdot \nabla
+\end{equation}
+known as the total, or convective derivative. We can think about it as taking the time derivative in the frame moving with the liquid. Suppose $F(\v{x}, t) = F(\v{x} - \v{v}t)$, then $\od{F}{t} = 0$.
+
+\subsection{Entropy}
+Counting the number of equations that we have, we are actually underconstrained - we need some information about the pressure field $p(\v{x}, t)$. To this end, we assume that the fluid is locally in thermal equilibrium. If we look at the entropy in space and time, this is conserved:
+\begin{equation}
+    \dpd{S}{t} + \nabla\cdot (S\v{v}) = 0
+\end{equation}
+Note that if there is dissipation of heat flow this is no longer valid, but we do not have time to discuss what happens when we relax the notion of thermal equilibrium. We can define $s = \frac{S}{\rho_m}$, and then:
+\begin{equation}
+    \dod{s}{t} = 0.
+\end{equation}
+How to see this? From mass conservation we have:
+\begin{equation}
+    \dpd{\rho_m}{t} + \v{v} \cdot \nabla \rho_m + (\nabla \cdot \v{v})\rho_m = \dod{\rho_m} + (\nabla \cdot \v{v})\rho_m = 0
+\end{equation}
+and dividing by $\rho_m$:
+\begin{equation}
+    \dod{}{t}\ln(\rho_m) + \nabla \cdot \v{v} = 0
+\end{equation}
+and similar manipulations tell us that:
+\begin{equation}
+    \dod{}{t}\ln(S) + \nabla \cdot \v{v} = 0
+\end{equation}
+and hence:
+\begin{equation}
+    \dod{}{t}\frac{S}{\rho_m} = 0
+\end{equation}
+Thus, $s$ is a constant along the flow. It can be shown that $p(\v{x}, t)$ only depends on $\rho_m$ and $s$. The precise dependence must be studied on a case-by-case basis. For an ideal gas:
+\begin{equation}
+    \dod{}{t}\left(\frac{p}{\rho^\gamma_m}\right) = 0
+\end{equation}
+where:
+\begin{equation}
+    \gamma = \frac{c_p}{c_v}
+\end{equation}
+and $\gamma = \frac{5}{3}$ for a monoatomic ideal gas.
+
+\subsection{Induction Equation, Removing $\v{E}$}
+So - we have a gigantic coupled system of equations, the Maxwell equations as well as the fluid dynamic equations. Is what we said enough to solve for anything? Well, yes and no. In the Maxwell equations, we saw the charge and current densities $\rho(\v{x}, t), \v{J}(\v{x}, t)$ - these are sources, and so we have to specify them.
+
+To this end, we assume that positive and negative charges do not separate on a macroscopic scale, and hence $\rho(\v{x}, t) = 0$. What this means is that the lorentz force (which we take to be the only force) reduces to:
+\begin{equation}
+    \v{f} = \v{f}_L = \v{J} \times \v{B}
+\end{equation}
+
+The plasma is highly conductive. In a frame moving with the fluid, the particles do not accelerate, and hence:
+\begin{equation}
+    \v{E}' = 0
+\end{equation}
+where $\v{E}'$ is the electric field as viewed from the frame moving with the river. We know how $\v{E}, \v{E}'$ are related:
+\begin{equation}\label{eq:transformE}
+    \v{E}' = \gamma(\v{E} + \v{v}\times\v{B}) \approx \v{E} + \v{v} \times \v{B} = 0
+\end{equation}
+Taking the curl of the above equation:
+\begin{equation}
+    \nabla \times (\v{E} + \v{v} \times \v{B}) = 0
+\end{equation}
+Now using that:
+\begin{equation}
+    \nabla \times \v{E} + \dot{\v{B}} = 0
+\end{equation}
+we find:
+\begin{equation}
+    \nabla \times (\v{v} \times \v{B}) = \dot{\v{B}}
+\end{equation}
+known as the induction equation.
+
+Now we look at the other Maxwell equations
+\begin{equation}
+    \nabla \times \v{B} - \frac{1}{c^2}\dot{\v{E}} = \mu_0\v{J}
+\end{equation}
+we claim we can drop the electric field term. Why? From Eq. \eqref{eq:transformE}, we have:
+\begin{equation}
+    \abs{\v{E}} \sim \abs{\v{v}}\abs{\v{B}}
+\end{equation}
+So:
+\begin{equation}
+    E \sim \frac{v}{c}Bc
+\end{equation}
+The nonrelativistic assumption of $\frac{v}{c} \ll 1$ then translates to:
+\begin{equation}
+    \frac{E}{cB} \ll 1
+\end{equation}
+Then:
+\begin{equation}
+    \frac{1}{c^2}\dpd{}{t}E  \frac{1}{c^2}\dpd{E}{x}\dpd{x}{t} = \frac{v}{c^2}\dpd{}{x}E
+\end{equation}
+So then comparing with $\od{B}{x}$ from the curl:
+\begin{equation}
+    cB \gg \frac{v}{c}E
+\end{equation}
+We could complain about the illegal trick, namely ignoring the $\pd{}{x}$s, but let us assume that it also holds with the derivatives. We now have:
+\begin{equation}
+    \nabla \times \v{B} = \mu_0 \v{J}
+\end{equation}
+We can now eliminate $\v{J}$ in the force:
+\begin{equation}
+    \v{f} = \v{J} \times \v{B} = \frac{1}{\mu_0}(\nabla \times \v{B}) \times \v{B}
+\end{equation}
+So then with Euler's equation:
+\begin{equation}
+    \rho_m\left(\dpd{}{t} + \v{v} \cdot \nabla\right)\v{v} = =\frac{1}{\mu_0}\v{B} \times (\nabla \times \v{B}) - \nabla p
+\end{equation}
+we have four fields $\v{B}, \rho_m, \v{v}, p$ which we can solve for.
+
+\subsection{Assembling the Ideal MHD System}
+Assembling our four equations:
+\begin{itemize}
+    \item Mass conservation:
+    \begin{equation}
+         \dot{\rho}_m + \nabla \cdot (\rho_m\v{v}) = 0
+    \end{equation}
+    \item Induction equation:
+    \begin{equation}
+        \nabla \times (\v{v} \times \v{B}) = \dot{\v{B}}
+    \end{equation}
+    \item Pressure evolution:
+    \begin{equation}
+        \dod{}{t}\left(\frac{p}{\rho^\gamma_m}\right) = 0
+    \end{equation}
+    \item Euler's equation:
+    \begin{equation}
+    \rho_m\left(\dpd{}{t} + \v{v} \cdot \nabla\right)\v{v}  =\frac{1}{\mu_0}\v{B} \times (\nabla \times \v{B}) - \nabla p
+\end{equation}
+\end{itemize}
+Together this is an ideal MHD system.
+
+Now that we have assumed infinite conductivity $\sigma \to \infty$; we have Ohm's law:
+\begin{equation}
+    \v{J} = \sigma(\v{E} + \v{v} \times \v{B})
+\end{equation}
+so in order to have finite current but with $\v{E} + \v{v} \times \v{B}$ we must have $\sigma \to \infty$. Further, taking the curl:
+\begin{equation}
+    \nabla \times \v{J} = \sigma(-\dot{\v{B}} + \nabla \times (\v{v} \times \v{B}))
+\end{equation}
+A finite conductivity would show up in the induction equation:
+\begin{equation}
+    \nabla \times (\v{v} \times \v{B}) = \dot{\v{B}}
+\end{equation}
+with:
+\begin{equation}
+    -\frac{1}{\mu_0\sigma}\nabla \times (\nabla \times \v{B}) = -\frac{1}{\mu_0 \sigma}\nabla^2 \v{B} - \dot{\v{B}} + \nabla \times (\v{v} \times \v{B})
+\end{equation}
+As $\sigma \to \infty$ we can drop all but the last two terms, giving the induction equation. For finite conductivity (as we saw in the Lorentz model) the general induction equation is more complicated.
